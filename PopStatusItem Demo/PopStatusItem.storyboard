@@ -8,7 +8,7 @@
         <scene sceneID="uxB-1n-ra9">
             <objects>
                 <windowController storyboardIdentifier="PopStatusItem" id="kxW-Fw-YeD" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Cvk-80-81M" customClass="PopStatusItemPanel" customModule="PopStatusItem">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Cvk-80-81M" customClass="PopStatusItemPanel" customModule="PopStatusItem">
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="294" y="313" width="404" height="226"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
