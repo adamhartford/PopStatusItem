@@ -13,9 +13,7 @@ To recreate the demo application:
 
 1. Add LSUIElement=YES to Info.plist.
 2. Uncheck "Is Initial Controller" in Main.storyboard window controller.
-3. Create PopStatusItem.storyboard and add an NSWindowController.
-4. Change window controller Class to PopStatusItemPanel and Module to PopStatusItem.
-5. Uncheck all window controller Appearance/Controls/Behavior properties.
+3. Change window controller Class to PopStatusItemPanel and Module to PopStatusItem.
 
 ### License
 PopDatePicker is released under the MIT license. See LICENSE for details.
