@@ -16,7 +16,6 @@
 		5BC817621AE7DA3100C284AD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BC817611AE7DA3100C284AD /* Images.xcassets */; };
 		5BC817651AE7DA3100C284AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BC817631AE7DA3100C284AD /* Main.storyboard */; };
 		5BC817711AE7DA3100C284AD /* PopStatusItem_DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC817701AE7DA3100C284AD /* PopStatusItem_DemoTests.swift */; };
-		5BE87EB51AEE6AB6007AA760 /* PopStatusItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BE87EB41AEE6AB6007AA760 /* PopStatusItem.storyboard */; };
 		5BE87EB71AEF0CB9007AA760 /* PopStatusItem.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5BC817391AE7DA2300C284AD /* PopStatusItem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -74,7 +73,6 @@
 		5BC8176A1AE7DA3100C284AD /* PopStatusItem DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PopStatusItem DemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BC8176F1AE7DA3100C284AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BC817701AE7DA3100C284AD /* PopStatusItem_DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopStatusItem_DemoTests.swift; sourceTree = "<group>"; };
-		5BE87EB41AEE6AB6007AA760 /* PopStatusItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PopStatusItem.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +172,6 @@
 				5BC8175F1AE7DA3000C284AD /* ViewController.swift */,
 				5BC817611AE7DA3100C284AD /* Images.xcassets */,
 				5BC817631AE7DA3100C284AD /* Main.storyboard */,
-				5BE87EB41AEE6AB6007AA760 /* PopStatusItem.storyboard */,
 				5BC8175B1AE7DA3000C284AD /* Supporting Files */,
 			);
 			path = "PopStatusItem Demo";
@@ -356,7 +353,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BE87EB51AEE6AB6007AA760 /* PopStatusItem.storyboard in Resources */,
 				5BC817621AE7DA3100C284AD /* Images.xcassets in Resources */,
 				5BC817651AE7DA3100C284AD /* Main.storyboard in Resources */,
 			);

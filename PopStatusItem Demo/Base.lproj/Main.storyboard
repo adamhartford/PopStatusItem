@@ -649,33 +649,65 @@
         <!--Window Controller-->
         <scene sceneID="LFk-J6-h8Z">
             <objects>
-                <windowController id="eW3-cT-cmJ" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="nPg-tC-SwO">
+                <customObject id="gb2-cM-2ZO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <windowController storyboardIdentifier="PopStatusItem" id="eW3-cT-cmJ" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="nPg-tC-SwO" customClass="PopStatusItemPanel" customModule="PopStatusItem">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="294" y="313" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
                     </window>
                     <connections>
-                        <segue destination="zve-tU-aul" kind="relationship" relationship="window.shadowedContentViewController" id="hb2-Yj-nHh"/>
+                        <segue destination="Wg1-es-IGc" kind="relationship" relationship="window.shadowedContentViewController" id="N0c-9g-maj"/>
                     </connections>
                 </windowController>
-                <customObject id="gb2-cM-2ZO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="104" y="241"/>
+            <point key="canvasLocation" x="104" y="281"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="9P4-2X-H5G">
+        <scene sceneID="wlU-YY-QfK">
             <objects>
-                <viewController id="zve-tU-aul" sceneMemberID="viewController">
-                    <view key="view" id="sZB-Vm-rde">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <customObject id="6Lc-6c-oFU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController id="Wg1-es-IGc" customClass="ViewController" customModule="PopStatusItem_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="eMQ-jC-nnX">
+                        <rect key="frame" x="0.0" y="0.0" width="362" height="222"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZXe-Ts-SLh">
+                                <rect key="frame" x="20" y="169" width="322" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Your Name" drawsBackground="YES" id="Oni-My-2kP">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YVi-3u-fYl">
+                                <rect key="frame" x="109" y="126" width="144" height="32"/>
+                                <buttonCell key="cell" type="push" title="Say Hello" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BkU-gK-glY">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="sayHello:" target="Wg1-es-IGc" id="bcx-ao-7Mv"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XZc-qL-doF">
+                                <rect key="frame" x="18" y="20" width="326" height="66"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="LML-BY-QE1">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
                     </view>
+                    <connections>
+                        <outlet property="label" destination="XZc-qL-doF" id="WwH-Vs-p0H"/>
+                        <outlet property="textField" destination="ZXe-Ts-SLh" id="5hM-Fc-4pY"/>
+                    </connections>
                 </viewController>
-                <customObject id="9fs-HF-slh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="104" y="646"/>
+            <point key="canvasLocation" x="104" y="655"/>
         </scene>
     </scenes>
 </document>

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-public class PopStatusItem: NSImageView, NSPopoverDelegate {
+public class PopStatusItem: NSImageView {
     
     struct Constants {
         static let kAppleInterfaceStyle = "AppleInterfaceStyle"
@@ -16,20 +16,7 @@ public class PopStatusItem: NSImageView, NSPopoverDelegate {
         static let kAppleInterfaceThemeChangedNotification = "AppleInterfaceThemeChangedNotification"
     }
     
-    public var shouldShow: (() -> Bool)?
-    public var willShow: (() -> ())?
-    public var didShow: (() -> ())?
-    public var shouldClose: (() -> Bool)?
-    public var willClose: (() -> ())?
-    public var didClose: (() -> ())?
-    
-    public var windowController: NSWindowController? {
-        didSet {
-            windowController?.window?.level = Int(CGWindowLevelForKey(Int32(kCGPopUpMenuWindowLevelKey)))
-            windowController?.window?.opaque = false
-            windowController?.window?.backgroundColor = .clearColor()
-        }
-    }
+    public var windowController: NSWindowController?
     
     public override var image: NSImage? {
         didSet {
@@ -43,10 +30,12 @@ public class PopStatusItem: NSImageView, NSPopoverDelegate {
         }
     }
     
-    var active = false
+    public let popover = NSPopover()
+    
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
-    let popover = NSPopover()
     let dummyMenu = NSMenu()
+    
+    var active = false
     var popoverTransiencyMonitor: AnyObject?
     var interfaceThemeObserver: AnyObject?
     
@@ -68,8 +57,6 @@ public class PopStatusItem: NSImageView, NSPopoverDelegate {
                 self?.setNeedsDisplay()
             }
         }
-        
-        popover.delegate = self
     }
     
     deinit {
@@ -129,36 +116,6 @@ public class PopStatusItem: NSImageView, NSPopoverDelegate {
             return style == Constants.kAppleInterfaceStyleDark
         }
         return false
-    }
-    
-    // MARK: - NSPopoverDelegate methods
-    
-    public func popoverDidClose(notification: NSNotification) {
-        didClose?()
-    }
-    
-    public func popoverDidShow(notification: NSNotification) {
-        didShow?()
-    }
-    
-    public func popoverShouldClose(popover: NSPopover) -> Bool {
-        if let callback = shouldClose {
-            return callback()
-        }
-        return true
-    }
-    
-    public func popoverShouldDetach(popover: NSPopover) -> Bool {
-        return false
-    }
-    
-    public func popoverWillClose(notification: NSNotification) {
-        willClose?()
-        
-    }
-    
-    public func popoverWillShow(notification: NSNotification) {
-        willShow?()
     }
     
 }

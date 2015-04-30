@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         
         let popStatusItem = PopStatusItem.new()
-        let storyboard = NSStoryboard(name: "PopStatusItem", bundle: nil)
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
         popStatusItem.windowController = storyboard!.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
         popStatusItem.image = NSImage(named: "statusImage")
         popStatusItem.alternateImage = NSImage(named: "alternateImage")
