@@ -9,6 +9,16 @@ CocoaPods (TODO)
 Carthage (TODO)
 
 ## Usage
+```swift
+func applicationDidFinishLaunching(aNotification: NSNotification) {
+    let popStatusItem = PopStatusItem.new()
+    let storyboard = NSStoryboard(name: "Main", bundle: nil)
+    popStatusItem.windowController = storyboard!.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
+    popStatusItem.image = NSImage(named: "statusImage")
+    popStatusItem.alternateImage = NSImage(named: "alternateImage")
+}
+```
+
 To recreate the demo application:
 
 1. Add LSUIElement=YES to Info.plist.
