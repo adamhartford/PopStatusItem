@@ -4,9 +4,18 @@ Shows an NSPopover from the status bar. Uses NSWindowController with an NSPanel 
 ![Screenshot](https://db.tt/3onYeACR)
 
 ## Installation
-CocoaPods (TODO)
+[CocoaPods](https://cocoapods.org):
+``` ruby
+platform :osx, '10.10'
+use_frameworks!
 
-Carthage (TODO)
+pod 'PopStatusItem'
+```
+
+[Carthage](https://github.com/Carthage/Carthage):
+```
+github 'adamhartford/PopStatusItem'
+```
 
 ## Usage
 ```swift
