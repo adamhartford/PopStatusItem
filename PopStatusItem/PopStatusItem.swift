@@ -72,6 +72,7 @@ public class PopStatusItem: NSImageView {
         if let observer: AnyObject = interfaceThemeObserver {
             NSDistributedNotificationCenter.defaultCenter().removeObserver(observer)
         }
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     public override func drawRect(dirtyRect: NSRect) {
