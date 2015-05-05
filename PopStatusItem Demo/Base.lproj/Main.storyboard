@@ -651,7 +651,7 @@
             <objects>
                 <customObject id="gb2-cM-2ZO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <windowController storyboardIdentifier="PopStatusItem" id="eW3-cT-cmJ" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="nPg-tC-SwO" customClass="PopStatusItemPanel" customModule="PopStatusItem">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="nPg-tC-SwO">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="294" y="313" width="480" height="270"/>
@@ -670,11 +670,11 @@
                 <customObject id="6Lc-6c-oFU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Wg1-es-IGc" customClass="ViewController" customModule="PopStatusItem_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="eMQ-jC-nnX">
-                        <rect key="frame" x="0.0" y="0.0" width="362" height="222"/>
+                        <rect key="frame" x="0.0" y="0.0" width="362" height="156"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZXe-Ts-SLh">
-                                <rect key="frame" x="20" y="169" width="322" height="22"/>
+                                <rect key="frame" x="58" y="104" width="247" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Your Name" drawsBackground="YES" id="Oni-My-2kP">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -682,7 +682,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YVi-3u-fYl">
-                                <rect key="frame" x="109" y="126" width="144" height="32"/>
+                                <rect key="frame" x="109" y="68" width="144" height="32"/>
                                 <buttonCell key="cell" type="push" title="Say Hello" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BkU-gK-glY">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -692,7 +692,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XZc-qL-doF">
-                                <rect key="frame" x="18" y="20" width="326" height="66"/>
+                                <rect key="frame" x="18" y="20" width="326" height="39"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="LML-BY-QE1">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -707,7 +707,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="104" y="655"/>
+            <point key="canvasLocation" x="104" y="622"/>
         </scene>
     </scenes>
 </document>

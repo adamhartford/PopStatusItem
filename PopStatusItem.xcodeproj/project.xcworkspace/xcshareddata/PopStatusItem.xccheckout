@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>4764F3AA-A6EC-466A-9CD7-A4596DEA30C2</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>PopStatusItem</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DC5A501419C544007F9F6A5EF8314977DFB120D8</key>
 		<string>https://github.com/adamhartford/PopStatusItem.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PopStatusItem.xcodeproj/project.xcworkspace</string>
+	<string>PopStatusItem.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DC5A501419C544007F9F6A5EF8314977DFB120D8</key>

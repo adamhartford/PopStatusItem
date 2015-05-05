@@ -20,13 +20,13 @@ public class PopStatusItem: NSImageView {
     
     public override var image: NSImage? {
         didSet {
-            image?.setTemplate(isDarkMode())
+            image?.setTemplate(isDarkMode)
         }
     }
     
     public var alternateImage: NSImage? {
         didSet {
-            alternateImage?.setTemplate(isDarkMode())
+            alternateImage?.setTemplate(isDarkMode)
         }
     }
     
@@ -35,6 +35,7 @@ public class PopStatusItem: NSImageView {
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
     let dummyMenu = NSMenu()
     
+    var myWindow: NSWindow!
     var active = false
     var popoverTransiencyMonitor: AnyObject?
     var interfaceThemeObserver: AnyObject?
@@ -46,12 +47,20 @@ public class PopStatusItem: NSImageView {
     init() {
         let thickness = NSStatusBar.systemStatusBar().thickness
         let frame = CGRectMake(0, 0, thickness, thickness)
+        
         super.init(frame: frame)
         
         statusItem.view = self
         
+        let rect = statusItem.view!.window!.frame
+        myWindow = NSWindow(contentRect: rect, styleMask: NSBorderlessWindowMask, backing: .Buffered, defer: false)
+        myWindow.opaque = false
+        myWindow.backgroundColor = .clearColor()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActive:", name: NSApplicationWillResignActiveNotification, object: nil)
+        
         interfaceThemeObserver = NSDistributedNotificationCenter.defaultCenter().addObserverForName(Constants.kAppleInterfaceThemeChangedNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) in
-            if let isTemplate = self?.isDarkMode() {
+            if let isTemplate = self?.isDarkMode {
                 self?.image?.setTemplate(isTemplate)
                 self?.alternateImage?.setTemplate(isTemplate)
                 self?.setNeedsDisplay()
@@ -82,15 +91,21 @@ public class PopStatusItem: NSImageView {
     }
     
     func showPopover() {
+        NSApp.activateIgnoringOtherApps(true)
+        myWindow.makeKeyAndOrderFront(nil)
+        
         active = true
         toggleImage()
         statusItem.popUpStatusItemMenu(dummyMenu)
         
         if let window = windowController?.window {
             popover.contentViewController = windowController?.contentViewController
-            popover.showRelativeToRect(frame, ofView: self, preferredEdge: NSMinYEdge)
             
-            popoverTransiencyMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.LeftMouseDownMask|NSEventMask.RightMouseDownMask, handler: { [weak self] (event) in
+            let frame = myWindow.contentView.frame!
+            let rect = NSMakeRect(frame.origin.x, frame.origin.y + frame.size.height - 1, frame.size.width, frame.size.height)
+            popover.showRelativeToRect(rect, ofView: myWindow.contentView as! NSView, preferredEdge: NSMaxYEdge)
+            
+            popoverTransiencyMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.LeftMouseDownMask|NSEventMask.RightMouseDownMask, handler: { [weak self] event in
                 self?.hidePopover()
             })
         }
@@ -111,17 +126,17 @@ public class PopStatusItem: NSImageView {
         alternateImage = img
     }
     
-    func isDarkMode() -> Bool {
+    var isDarkMode: Bool {
         if let style = NSUserDefaults.standardUserDefaults().objectForKey(Constants.kAppleInterfaceStyle) as? String {
             return style == Constants.kAppleInterfaceStyleDark
         }
         return false
     }
     
-}
-
-public class PopStatusItemPanel: NSPanel {
-    public override var canBecomeKeyWindow: Bool {
-        return true
+    public func applicationWillResignActive(notification: NSNotification) {
+        if active {
+            hidePopover()
+        }
     }
+    
 }
