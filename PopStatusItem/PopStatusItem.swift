@@ -52,11 +52,6 @@ public class PopStatusItem: NSImageView {
         
         statusItem.view = self
         
-        let rect = statusItem.view!.window!.frame
-        myWindow = NSWindow(contentRect: rect, styleMask: NSBorderlessWindowMask, backing: .Buffered, defer: false)
-        myWindow.opaque = false
-        myWindow.backgroundColor = .clearColor()
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActive:", name: NSApplicationWillResignActiveNotification, object: nil)
         
         interfaceThemeObserver = NSDistributedNotificationCenter.defaultCenter().addObserverForName(Constants.kAppleInterfaceThemeChangedNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) in
@@ -93,6 +88,11 @@ public class PopStatusItem: NSImageView {
     
     func showPopover() {
         NSApp.activateIgnoringOtherApps(true)
+        
+        let rect = statusItem.view!.window!.frame
+        myWindow = NSWindow(contentRect: rect, styleMask: NSBorderlessWindowMask, backing: .Buffered, defer: false)
+        myWindow.opaque = false
+        myWindow.backgroundColor = .clearColor()
         myWindow.makeKeyAndOrderFront(nil)
         
         active = true
