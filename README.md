@@ -1,5 +1,5 @@
 # PopStatusItem
-Shows an NSPopover from the status bar. Works with Mission Control. Supports dark mode on Yosemite.
+Shows an NSPopover from the status bar. Works with Mission Control and Spaces. Supports dark mode on Yosemite.
 
 ![Screenshot](https://db.tt/3onYeACR)
 
