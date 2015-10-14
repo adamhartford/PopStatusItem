@@ -17,16 +17,17 @@ public class PopStatusItem: NSImageView {
     }
     
     public var windowController: NSWindowController?
+    var prevApp: NSRunningApplication?
     
     public override var image: NSImage? {
         didSet {
-            image?.setTemplate(isDarkMode)
+            image?.template = isDarkMode
         }
     }
     
     public var alternateImage: NSImage? {
         didSet {
-            alternateImage?.setTemplate(isDarkMode)
+            alternateImage?.template = isDarkMode
         }
     }
     
@@ -44,7 +45,7 @@ public class PopStatusItem: NSImageView {
         super.init(coder: coder)
     }
 
-    init() {
+    public init() {
         let thickness = NSStatusBar.systemStatusBar().thickness
         let frame = CGRectMake(0, 0, thickness, thickness)
         
@@ -56,8 +57,8 @@ public class PopStatusItem: NSImageView {
         
         interfaceThemeObserver = NSDistributedNotificationCenter.defaultCenter().addObserverForName(Constants.kAppleInterfaceThemeChangedNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) in
             if let isTemplate = self?.isDarkMode {
-                self?.image?.setTemplate(isTemplate)
-                self?.alternateImage?.setTemplate(isTemplate)
+                self?.image?.template = isTemplate
+                self?.alternateImage?.template = isTemplate
                 self?.setNeedsDisplay()
             }
         }
@@ -87,10 +88,11 @@ public class PopStatusItem: NSImageView {
     }
     
     func showPopover() {
+        prevApp = NSWorkspace.sharedWorkspace().frontmostApplication
         NSApp.activateIgnoringOtherApps(true)
         
         let rect = statusItem.view!.window!.frame
-        myWindow = NSWindow(contentRect: rect, styleMask: NSBorderlessWindowMask, backing: .Buffered, defer: false)
+        myWindow = NSWindow(contentRect: rect, styleMask: NSBorderlessWindowMask, backing: .Buffered, `defer`: false)
         myWindow.opaque = false
         myWindow.backgroundColor = .clearColor()
         myWindow.makeKeyAndOrderFront(nil)
@@ -99,14 +101,14 @@ public class PopStatusItem: NSImageView {
         toggleImage()
         statusItem.popUpStatusItemMenu(dummyMenu)
         
-        if let window = windowController?.window {
+        if let _ = windowController?.window {
             popover.contentViewController = windowController?.contentViewController
             
-            let frame = myWindow.contentView.frame!
+            let frame = myWindow.contentView!.frame
             let rect = NSMakeRect(frame.origin.x, frame.origin.y + frame.size.height - 1, frame.size.width, frame.size.height)
-            popover.showRelativeToRect(rect, ofView: myWindow.contentView as! NSView, preferredEdge: NSMaxYEdge)
+            popover.showRelativeToRect(rect, ofView: myWindow.contentView!, preferredEdge: .MaxY)
             
-            popoverTransiencyMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.LeftMouseDownMask|NSEventMask.RightMouseDownMask, handler: { [weak self] event in
+            popoverTransiencyMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask([NSEventMask.LeftMouseDownMask, NSEventMask.RightMouseDownMask], handler: { [weak self] event in
                 self?.hidePopover()
             })
         }
@@ -116,6 +118,7 @@ public class PopStatusItem: NSImageView {
         active = false
         self.toggleImage()
         popover.close()
+        prevApp?.activateWithOptions(.ActivateIgnoringOtherApps)
         if let monitor: AnyObject = popoverTransiencyMonitor {
             NSEvent.removeMonitor(monitor)
         }

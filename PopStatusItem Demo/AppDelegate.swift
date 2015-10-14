@@ -17,16 +17,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
         
-        let popStatusItem = PopStatusItem.new()
+        let popStatusItem = PopStatusItem()
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        popStatusItem.windowController = storyboard!.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
+        popStatusItem.windowController = storyboard.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
         popStatusItem.image = NSImage(named: "statusImage")
         popStatusItem.alternateImage = NSImage(named: "alternateImage")
         
-        // This corresponds to LSUIElement=1 in the Info.plist
-        //NSApp.setActivationPolicy(.Accessory)
-        
-        // If you're not using NSTextFields...
         //NSApp.setActivationPolicy(.Prohibited)
     }
 
