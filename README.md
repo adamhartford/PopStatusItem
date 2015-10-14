@@ -20,9 +20,9 @@ github 'adamhartford/PopStatusItem'
 ## Usage
 ```swift
 func applicationDidFinishLaunching(aNotification: NSNotification) {
-    let popStatusItem = PopStatusItem.new()
+    let popStatusItem = PopStatusItem()
     let storyboard = NSStoryboard(name: "Main", bundle: nil)
-    popStatusItem.windowController = storyboard!.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
+    popStatusItem.windowController = storyboard.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
     popStatusItem.image = NSImage(named: "statusImage")
     popStatusItem.alternateImage = NSImage(named: "alternateImage")
 }
