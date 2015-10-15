@@ -17,7 +17,6 @@ public class PopStatusItem: NSImageView {
     }
     
     public var windowController: NSWindowController?
-    var prevApp: NSRunningApplication?
     
     public override var image: NSImage? {
         didSet {
@@ -88,7 +87,6 @@ public class PopStatusItem: NSImageView {
     }
     
     func showPopover() {
-        prevApp = NSWorkspace.sharedWorkspace().frontmostApplication
         NSApp.activateIgnoringOtherApps(true)
         
         let rect = statusItem.view!.window!.frame
@@ -118,7 +116,6 @@ public class PopStatusItem: NSImageView {
         active = false
         self.toggleImage()
         popover.close()
-        prevApp?.activateWithOptions(.ActivateIgnoringOtherApps)
         if let monitor: AnyObject = popoverTransiencyMonitor {
             NSEvent.removeMonitor(monitor)
         }
