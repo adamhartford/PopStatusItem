@@ -12,18 +12,13 @@ import PopStatusItem
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
+    let popStatusItem = PopStatusItem(image: NSImage(named: "buttonImage")!)
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
         
-        let popStatusItem = PopStatusItem()
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         popStatusItem.windowController = storyboard.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
-        popStatusItem.image = NSImage(named: "statusImage")
-        popStatusItem.alternateImage = NSImage(named: "alternateImage")
-        
-        //NSApp.setActivationPolicy(.Prohibited)
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
