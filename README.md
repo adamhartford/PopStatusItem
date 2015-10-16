@@ -1,5 +1,5 @@
 # PopStatusItem
-Shows an NSPopover from the status bar. Works with Mission Control and Spaces. Supports dark mode on Yosemite.
+Shows an NSPopover from the status bar. Works with Mission Control and Spaces. Supports dark mode.
 
 ![Screenshot](https://db.tt/3onYeACR)
 
@@ -19,12 +19,11 @@ github 'adamhartford/PopStatusItem'
 
 ## Usage
 ```swift
+let popStatusItem = PopStatusItem(image: NSImage(named: "buttonImage")!)
+
 func applicationDidFinishLaunching(aNotification: NSNotification) {
-    let popStatusItem = PopStatusItem()
     let storyboard = NSStoryboard(name: "Main", bundle: nil)
     popStatusItem.windowController = storyboard.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
-    popStatusItem.image = NSImage(named: "statusImage")
-    popStatusItem.alternateImage = NSImage(named: "alternateImage")
 }
 ```
 
