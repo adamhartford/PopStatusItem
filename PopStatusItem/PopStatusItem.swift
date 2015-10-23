@@ -14,6 +14,9 @@ public class PopStatusItem: NSObject {
     
     public let popover = NSPopover()
     
+    public var highlight = false
+    public var activate = false
+    
     let dummyMenu = NSMenu()
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
     
@@ -43,16 +46,22 @@ public class PopStatusItem: NSObject {
         if active {
             hidePopover()
         } else {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, 0)
-            dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-                self?.statusItem.button?.highlighted = true
+            if highlight {
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, 0)
+                dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+                    self?.statusItem.button?.highlighted = true
+                }
+            }
+            
+            if activate {
+                NSApp.activateIgnoringOtherApps(true)
             }
             
             showPopover()
         }
     }
     
-    func showPopover() {        
+    func showPopover() {
         active = true
         statusItem.popUpStatusItemMenu(dummyMenu)
         

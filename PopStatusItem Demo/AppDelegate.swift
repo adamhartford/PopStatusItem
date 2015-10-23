@@ -19,6 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         popStatusItem.windowController = storyboard.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
+        
+        popStatusItem.highlight = true // Default is false
+        popStatusItem.activate = true // Default is false
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
