@@ -27,6 +27,16 @@ func applicationDidFinishLaunching(aNotification: NSNotification) {
 }
 ```
 
+## Options
+```swift
+popStatusItem.highlight = true // Highlights status bar icon. Default is false.
+popStatusItem.activate = true // Makes popover window active. Default is false.
+        
+popStatusItem.togglePopover()
+popStatusItem.showPopover()
+popStatusItem.hidePopover()
+```
+
 Usage, or to recreate the demo application:
 
 1. Add LSUIElement=YES to Info.plist.
