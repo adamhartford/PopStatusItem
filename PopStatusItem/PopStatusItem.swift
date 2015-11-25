@@ -42,7 +42,7 @@ public class PopStatusItem: NSObject {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    func togglePopover() {
+    public func togglePopover() {
         if active {
             hidePopover()
         } else {
@@ -61,25 +61,29 @@ public class PopStatusItem: NSObject {
         }
     }
     
-    func showPopover() {
-        active = true
-        statusItem.popUpStatusItemMenu(dummyMenu)
-        
-        if let _ = windowController?.window {
-            popover.contentViewController = windowController?.contentViewController
-            popover.showRelativeToRect(NSZeroRect, ofView: statusItem.button!, preferredEdge: .MinY)
-            popoverTransiencyMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask([NSEventMask.LeftMouseDownMask, NSEventMask.RightMouseDownMask], handler: { [weak self] event in
-                self?.hidePopover()
-            })
+    public func showPopover() {
+        if !active {
+            active = true
+            statusItem.popUpStatusItemMenu(dummyMenu)
+            
+            if let _ = windowController?.window {
+                popover.contentViewController = windowController?.contentViewController
+                popover.showRelativeToRect(NSZeroRect, ofView: statusItem.button!, preferredEdge: .MinY)
+                popoverTransiencyMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask([NSEventMask.LeftMouseDownMask, NSEventMask.RightMouseDownMask], handler: { [weak self] event in
+                    self?.hidePopover()
+                })
+            }
         }
     }
     
-    func hidePopover() {
-        active = false
-        statusItem.button!.highlighted = false
-        popover.close()
-        if let monitor: AnyObject = popoverTransiencyMonitor {
-            NSEvent.removeMonitor(monitor)
+    public func hidePopover() {
+        if active {
+            active = false
+            statusItem.button!.highlighted = false
+            popover.close()
+            if let monitor: AnyObject = popoverTransiencyMonitor {
+                NSEvent.removeMonitor(monitor)
+            }
         }
     }
     

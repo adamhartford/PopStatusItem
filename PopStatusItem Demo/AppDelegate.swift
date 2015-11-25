@@ -22,6 +22,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         popStatusItem.highlight = true // Default is false
         popStatusItem.activate = true // Default is false
+        
+        popStatusItem.showPopover() // Show popover on startup
+        
+        // Force Aqua appearance, even in dark mode
+        //popStatusItem.popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
