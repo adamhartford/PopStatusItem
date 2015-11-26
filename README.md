@@ -25,16 +25,17 @@ func applicationDidFinishLaunching(aNotification: NSNotification) {
     let storyboard = NSStoryboard(name: "Main", bundle: nil)
     popStatusItem.windowController = storyboard.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
 }
+
+// Manual actions
+popStatusItem.togglePopover()
+popStatusItem.showPopover()
+popStatusItem.hidePopover()
 ```
 
 ## Options
 ```swift
 popStatusItem.highlight = true // Highlights status bar icon. Default is false.
 popStatusItem.activate = true // Makes popover window active. Default is false.
-        
-popStatusItem.togglePopover()
-popStatusItem.showPopover()
-popStatusItem.hidePopover()
 ```
 
 Usage, or to recreate the demo application:
