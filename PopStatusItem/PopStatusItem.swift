@@ -23,6 +23,15 @@ public class PopStatusItem: NSObject {
     var myWindow: NSWindow!
     var active = false
     var popoverTransiencyMonitor: AnyObject?
+    
+    public var buttonTitle: String? {
+        get {
+            return statusItem.button?.title
+        }
+        set {
+            statusItem.button?.title = newValue ?? ""
+        }
+    }
 
     public init(image: NSImage) {
         super.init()
