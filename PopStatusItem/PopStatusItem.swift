@@ -41,10 +41,10 @@ public class PopStatusItem: NSObject {
             button.image = image
             button.appearsDisabled = false
             button.target = self
-            button.action = "togglePopover"
+            button.action = #selector(PopStatusItem.togglePopover)
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActive:", name: NSApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NSApplicationDelegate.applicationWillResignActive(_:)), name: NSApplicationWillResignActiveNotification, object: nil)
     }
     
     deinit {
