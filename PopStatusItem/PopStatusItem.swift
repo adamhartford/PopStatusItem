@@ -8,78 +8,87 @@
 
 import Cocoa
 
-public class PopStatusItem: NSObject {
+open class PopStatusItem: NSObject {
     
-    public var windowController: NSWindowController?
+    open var windowController: NSWindowController?
     
-    public let popover = NSPopover()
+    open let popover = NSPopover()
     
-    public var highlight = false
-    public var activate = false
+    open var highlight = false
+    open var activate = false
     
     let dummyMenu = NSMenu()
-    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
+    let statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
     
     var myWindow: NSWindow!
     var active = false
     var popoverTransiencyMonitor: AnyObject?
+    
+    open var buttonTitle: String? {
+        get {
+            return statusItem.button?.title
+        }
+        set {
+            statusItem.button?.title = newValue ?? ""
+        }
+    }
 
     public init(image: NSImage) {
         super.init()
         
         if let button = statusItem.button {
-            image.template = true
+            image.isTemplate = true
             button.image = image
             button.appearsDisabled = false
             button.target = self
-            button.action = "togglePopover"
+            button.action = #selector(PopStatusItem.togglePopover)
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActive:", name: NSApplicationWillResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NSApplicationDelegate.applicationWillResignActive(_:)), name: NSNotification.Name.NSApplicationWillResignActive, object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    public func togglePopover() {
+    open func togglePopover() {
         if active {
             hidePopover()
         } else {
             if highlight {
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, 0)
-                dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-                    self?.statusItem.button?.highlighted = true
+                let delayTime = DispatchTime.now() + Double(0) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: delayTime) { [weak self] in
+                    self?.statusItem.button?.isHighlighted = true
                 }
             }
             
             if activate {
-                NSApp.activateIgnoringOtherApps(true)
+                NSApp.activate(ignoringOtherApps: true)
             }
             
             showPopover()
         }
     }
     
-    public func showPopover() {
+    open func showPopover() {
         if !active {
             active = true
-            statusItem.popUpStatusItemMenu(dummyMenu)
+            statusItem.popUpMenu(dummyMenu)
             
             if let _ = windowController?.window {
                 popover.contentViewController = windowController?.contentViewController
-                popover.showRelativeToRect(NSZeroRect, ofView: statusItem.button!, preferredEdge: .MinY)
-                popoverTransiencyMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask([NSEventMask.LeftMouseDownMask, NSEventMask.RightMouseDownMask], handler: { [weak self] event in
+                popover.show(relativeTo: NSZeroRect, of: statusItem.button!, preferredEdge: .minY)
+                popoverTransiencyMonitor = NSEvent.addGlobalMonitorForEvents(matching: [NSEventMask.leftMouseDown, NSEventMask.rightMouseDown], handler: { [weak self] event in
                     self?.hidePopover()
-                })
+                }) as AnyObject?
             }
         }
     }
     
-    public func hidePopover() {
+    open func hidePopover() {
         if active {
             active = false
-            statusItem.button!.highlighted = false
+            statusItem.button!.isHighlighted = false
             popover.close()
             if let monitor: AnyObject = popoverTransiencyMonitor {
                 NSEvent.removeMonitor(monitor)
@@ -87,7 +96,7 @@ public class PopStatusItem: NSObject {
         }
     }
     
-    public func applicationWillResignActive(notification: NSNotification) {
+    open func applicationWillResignActive(_ notification: Notification) {
         if active {
             hidePopover()
         }
