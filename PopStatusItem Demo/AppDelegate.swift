@@ -14,11 +14,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let popStatusItem = PopStatusItem(image: NSImage(named: "buttonImage")!)
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        popStatusItem.windowController = storyboard.instantiateControllerWithIdentifier("PopStatusItem") as? NSWindowController
+        popStatusItem.windowController = storyboard.instantiateController(withIdentifier: "PopStatusItem") as? NSWindowController
         
         popStatusItem.highlight = true // Default is false
         popStatusItem.activate = true // Default is false
@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //popStatusItem.popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
