@@ -20,9 +20,18 @@ open class PopStatusItem: NSObject {
     let dummyMenu = NSMenu()
     let statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
     
-    var myWindow: NSWindow!
     var active = false
     var popoverTransiencyMonitor: AnyObject?
+    
+    open var missionControlRunning: Bool {
+        let info = CGWindowListCopyWindowInfo(.optionOnScreenOnly, CGWindowID(0))
+        if let windows = info as? [[String: Any]] {
+            let count = windows.filter { $0["kCGWindowOwnerName"] as? String == "Dock" }.count
+            
+            return count > 3 // TODO Better way?
+        }
+        return false
+    }
     
     open var buttonTitle: String? {
         get {
@@ -45,6 +54,16 @@ open class PopStatusItem: NSObject {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(NSApplicationDelegate.applicationWillResignActive(_:)), name: NSNotification.Name.NSApplicationWillResignActive, object: nil)
+        
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            while true {
+                if self?.active == true && self?.missionControlRunning == true {
+                    DispatchQueue.main.async {
+                        self?.hidePopover()
+                    }
+                }
+            }
+        }
     }
     
     deinit {
@@ -101,5 +120,4 @@ open class PopStatusItem: NSObject {
             hidePopover()
         }
     }
-    
 }
