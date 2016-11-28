@@ -68,7 +68,7 @@ open class PopStatusItem: NSObject {
                         self?.hidePopover()
                     }
                 }
-                sleep(1)
+                Thread.sleep(forTimeInterval: 0.25)
             }
         }
     }
