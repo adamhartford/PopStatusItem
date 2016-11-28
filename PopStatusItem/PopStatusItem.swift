@@ -23,14 +23,18 @@ open class PopStatusItem: NSObject {
     var active = false
     var popoverTransiencyMonitor: AnyObject?
     
-    open var missionControlRunning: Bool {
+    var initialDockCount = 0
+    
+    private var dockCount: Int {
         let info = CGWindowListCopyWindowInfo(.optionOnScreenOnly, CGWindowID(0))
         if let windows = info as? [[String: Any]] {
-            let count = windows.filter { $0["kCGWindowOwnerName"] as? String == "Dock" }.count
-            
-            return count > 3 // TODO Better way?
+            return windows.filter { $0["kCGWindowOwnerName"] as? String == "Dock" }.count
         }
-        return false
+        return 0
+    }
+    
+    private var missionControlRunning: Bool {
+        return dockCount > initialDockCount
     }
     
     open var buttonTitle: String? {
@@ -55,6 +59,8 @@ open class PopStatusItem: NSObject {
         
         NotificationCenter.default.addObserver(self, selector: #selector(NSApplicationDelegate.applicationWillResignActive(_:)), name: NSNotification.Name.NSApplicationWillResignActive, object: nil)
         
+        initialDockCount = dockCount
+        
         DispatchQueue.global(qos: .background).async { [weak self] in
             while true {
                 if self?.active == true && self?.missionControlRunning == true {
@@ -62,6 +68,7 @@ open class PopStatusItem: NSObject {
                         self?.hidePopover()
                     }
                 }
+                sleep(1)
             }
         }
     }
