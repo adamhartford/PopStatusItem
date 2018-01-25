@@ -41,8 +41,7 @@ popStatusItem.activate = true // Makes popover window active. Default is false.
 Usage, or to recreate the demo application:
 
 1. Add `LSUIElement` = `YES` to Info.plist.
-2. Add `LSBackgroundOnly` = `YES` to Info.plist.
-3. Uncheck "Is Initial Controller" in Main.storyboard window controller.
+2. Uncheck "Is Initial Controller" in Main.storyboard window controller.
 
 ### License
 PopDatePicker is released under the MIT license. See LICENSE for details.
